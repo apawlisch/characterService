@@ -3,45 +3,64 @@ package com.revature.dto;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import com.revature.beans.Character;
+import com.revature.beans.Adventurer;
 
 @Table("character")
-public class CharacterDTO {
+public class AdventurerDTO {
 	@PrimaryKey
 	private String characterName;
-	
 	private Integer strength;
 	private Integer dexterity;
 	private Integer constitution;
 	private Integer intelligence;
 	private Integer wisdom;
 	private Integer charisma;
-	
 	private Integer armorClass;
 	private Integer initiative;
 	private Integer maxHitPoints;
 	private Integer currentHitPoints;
 	private Integer speed;
 	
-	public CharacterDTO() {
+	public AdventurerDTO() {
 		super();
 	}
 
-	public CharacterDTO(Character character) {
+	public AdventurerDTO(Adventurer adventurer) {
 		this();
-		this.characterName = character.getCharacterName();
-		this.strength = character.getStrength();
-		this.dexterity = character.getDexterity();
-		this.constitution = character.getConstitution();
-		this.intelligence = character.getIntelligence();
-		this.wisdom = character.getWisdom();
-		this.charisma = character.getCharisma();
-		this.armorClass = character.getArmorClass();
-		this.initiative = character.getInitiative();
-		this.maxHitPoints = character.getMaxHitPoints();
-		this.currentHitPoints = character.getCurrentHitPoints();
-		this.speed = character.getSpeed();
+		this.characterName = adventurer.getCharacterName();
+		this.strength = adventurer.getStrength();
+		this.dexterity = adventurer.getDexterity();
+		this.constitution = adventurer.getConstitution();
+		this.intelligence = adventurer.getIntelligence();
+		this.wisdom = adventurer.getWisdom();
+		this.charisma = adventurer.getCharisma();
+		this.armorClass = adventurer.getArmorClass();
+		this.initiative = adventurer.getInitiative();
+		this.maxHitPoints = adventurer.getMaxHitPoints();
+		this.currentHitPoints = adventurer.getCurrentHitPoints();
+		this.speed = adventurer.getSpeed();
 	}
+	
+	public Adventurer getAdventurer() {
+		Adventurer adventurer = new Adventurer();
+		adventurer.setCharacterName(this.characterName);
+		
+		adventurer.setStrength(this.strength);
+		adventurer.setDexterity(this.dexterity);
+		adventurer.setConstitution(this.constitution);
+		adventurer.setIntelligence(this.intelligence);
+		adventurer.setWisdom(this.wisdom);
+		adventurer.setCharisma(this.charisma);
+		
+		adventurer.setArmorClass(this.armorClass);
+		adventurer.setInitiative(this.initiative);
+		adventurer.setMaxHitPoints(this.maxHitPoints);
+		adventurer.setCurrentHitPoints(this.currentHitPoints);
+		adventurer.setSpeed(this.speed);
+		
+		return adventurer;
+	}
+	
 
 	public String getCharacterName() {
 		return characterName;
@@ -166,7 +185,7 @@ public class CharacterDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CharacterDTO other = (CharacterDTO) obj;
+		AdventurerDTO other = (AdventurerDTO) obj;
 		if (armorClass == null) {
 			if (other.armorClass != null)
 				return false;
@@ -232,12 +251,14 @@ public class CharacterDTO {
 
 	@Override
 	public String toString() {
-		return "CharacterDTO [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
+		return "AdventurerDTO [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom
 				+ ", charisma=" + charisma + ", armorClass=" + armorClass + ", initiative=" + initiative
 				+ ", maxHitPoints=" + maxHitPoints + ", currentHitPoints=" + currentHitPoints + ", speed=" + speed
 				+ "]";
 	}
+
+	
 	
 	
 	
