@@ -1,8 +1,13 @@
-package com.revature.beans;
+package com.revature.dto;
 
-import java.io.Serializable;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-public class Character implements Serializable {
+import com.revature.beans.Character;
+
+@Table("character")
+public class CharacterDTO {
+	@PrimaryKey
 	private String characterName;
 	
 	private Integer strength;
@@ -18,31 +23,24 @@ public class Character implements Serializable {
 	private Integer currentHitPoints;
 	private Integer speed;
 	
-	public Character() {
+	public CharacterDTO() {
 		super();
 	}
-	
-	public Character(String characterName, Integer strength, Integer dexterity,
-			Integer constitution, Integer intelligence, Integer wisdom, Integer charisma, Integer armorClass,
-			Integer initiative, Integer maxHitPoints, Integer currentHitPoints, Integer speed) {
+
+	public CharacterDTO(Character character) {
 		this();
-		this.characterName = characterName;
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.constitution = constitution;
-		this.intelligence = intelligence;
-		this.wisdom = wisdom;
-		this.charisma = charisma;
-		this.armorClass = armorClass;
-		this.initiative = initiative;
-		this.maxHitPoints = maxHitPoints;
-		this.currentHitPoints = currentHitPoints;
-		this.speed = speed;
-	}
-	
-	public Character(String characterName) {
-		this();
-		this.characterName = characterName;
+		this.characterName = character.getCharacterName();
+		this.strength = character.getStrength();
+		this.dexterity = character.getDexterity();
+		this.constitution = character.getConstitution();
+		this.intelligence = character.getIntelligence();
+		this.wisdom = character.getWisdom();
+		this.charisma = character.getCharisma();
+		this.armorClass = character.getArmorClass();
+		this.initiative = character.getInitiative();
+		this.maxHitPoints = character.getMaxHitPoints();
+		this.currentHitPoints = character.getCurrentHitPoints();
+		this.speed = character.getSpeed();
 	}
 
 	public String getCharacterName() {
@@ -168,7 +166,7 @@ public class Character implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Character other = (Character) obj;
+		CharacterDTO other = (CharacterDTO) obj;
 		if (armorClass == null) {
 			if (other.armorClass != null)
 				return false;
@@ -234,12 +232,15 @@ public class Character implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Character [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
+		return "CharacterDTO [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom
 				+ ", charisma=" + charisma + ", armorClass=" + armorClass + ", initiative=" + initiative
 				+ ", maxHitPoints=" + maxHitPoints + ", currentHitPoints=" + currentHitPoints + ", speed=" + speed
 				+ "]";
 	}
+	
+	
+	
 	
 
 }
