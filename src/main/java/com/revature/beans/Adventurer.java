@@ -2,7 +2,12 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+@Table("adventurer")
 public class Adventurer implements Serializable {
+	@PrimaryKey
 	private String characterName;
 	
 	private Integer strength;
@@ -234,7 +239,7 @@ public class Adventurer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Character [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
+		return "Adventurer [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom
 				+ ", charisma=" + charisma + ", armorClass=" + armorClass + ", initiative=" + initiative
 				+ ", maxHitPoints=" + maxHitPoints + ", currentHitPoints=" + currentHitPoints + ", speed=" + speed

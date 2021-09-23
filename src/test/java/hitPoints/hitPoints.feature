@@ -7,5 +7,8 @@ Scenario: as a user, i can subtract from the currentHitPoints of a character
 Feature: restore the hit points of a character
 Scenario: as a user, i can set the currentHitPoints of a character to their maxHitPoints
 
-Feature: view a characters hitpoints (max and current)
-Scenario: as a user, i can get the hitpoints of a character
+Feature: edit a characters max hitpoints
+Scenario: as a user, i can set the maxHitPoints of a character
+
+Feature: reset a characters max hitpoints
+Scenario: as a user, i can reset the maxHitPoints of a character
