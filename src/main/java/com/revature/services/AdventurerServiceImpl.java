@@ -107,7 +107,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 	@Override
 	public Mono<Adventurer> resetSpeed(String name) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
-			adv.setSpeed(adv.getDexterity() + 5);
+			adv.setSpeed(adv.getDexterity() + 25);
 			return advDao.save(adv);
 		});
 	}
@@ -233,6 +233,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 		advent.setInitiative(null);
 		
 		return advDao.save(advent);
+		
 	}
 	
 	// create character*

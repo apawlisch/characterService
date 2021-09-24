@@ -2,7 +2,6 @@ package com.revature.services;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -30,7 +29,7 @@ public class AdventurerServiceTest {
 	@BeforeAll
 	static void setUp() {
 		adv = new Adventurer();
-		adv.setCharacterName("testAdv");
+		
 		/*
 		adv.setStrength(1);
 		adv.setConstitution(1);
@@ -44,18 +43,6 @@ public class AdventurerServiceTest {
 		*/
 		
 		adv2 = new Adventurer();
-		//adv2.setCharacterName("testAdv2");
-		/*
-		adv2.setStrength(1);
-		adv2.setConstitution(1);
-		adv2.setIntelligence(1);
-		adv2.setWisdom(1);
-		adv2.setCharisma(1);
-		adv.setDexterity(1);
-		adv2.setSpeed(1);
-		adv2.setArmorClass(1);
-		adv2.setInitiative(1);
-		*/
 		
 	}
 	
@@ -64,8 +51,19 @@ public class AdventurerServiceTest {
 		// initializes the mockito annotations above
 		MockitoAnnotations.openMocks(this);
 		
+		// reset for tests
+		adv.setCharacterName("testAdv");
 		adv.setCurrentHitPoints(30);
 		adv.setMaxHitPoints(40);
+		adv.setStrength(null);
+		adv.setConstitution(null);
+		adv.setIntelligence(null);
+		adv.setWisdom(null);
+		adv.setCharisma(null);
+		adv.setDexterity(null);
+		adv.setSpeed(null);
+		adv.setArmorClass(null);
+		adv.setInitiative(null);
 		
 	}
 	
@@ -214,28 +212,148 @@ public class AdventurerServiceTest {
 	// set speed
 	@Test
 	void testSetSpeed() {
+		adv2.setCharacterName("testAdv");
+		adv2.setSpeed(30);
 		
+		adv.setSpeed(10);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.setSpeed("testAdv", 30))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getSpeed().equals(newAdv.getSpeed());
+		})
+		.verifyComplete();
 	}
 	
 	// reset speed
 	@Test
 	void testResetSpeed() {
+		adv2.setCharacterName("testAdv");
+		adv2.setDexterity(5);
+		adv2.setSpeed(30);
 		
+		adv.setDexterity(5);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.resetSpeed("testAdv"))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getSpeed().equals(newAdv.getSpeed());
+		})
+		.verifyComplete();
 	}
 	
 	// set initiative
+	@Test
+	void testSetInitiative() {
+		adv2.setCharacterName("testAdv");
+		adv2.setInitiative(7);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.setInitiative("testAdv", 7))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getInitiative().equals(newAdv.getInitiative());
+		})
+		.verifyComplete();
+		
+	}
 	
 	// set armor class
-	
-	// route create
+	@Test
+	void testSetArmorClass() {
+		adv2.setCharacterName("testAdv");
+		adv2.setArmorClass(10);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.setArmorClass("testAdv", 10))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getArmorClass().equals(newAdv.getArmorClass());
+		})
+		.verifyComplete();
+	}
 	
 	// create with name
+	@Test
+	void testCreateWithName() {
+		adv2.setCharacterName("name");
+		
+		Adventurer createAdv = new Adventurer();
+		createAdv.setCharacterName("name");
+		
+		Mockito.when(advDao.save(createAdv)).thenReturn(Mono.just(createAdv));
+		
+		StepVerifier.create(service.createWithName(createAdv))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& newAdv.getArmorClass() == null
+					&& newAdv.getStrength() == null
+					&& newAdv.getDexterity() == null
+					&& newAdv.getConstitution() == null
+					&& newAdv.getIntelligence() == null
+					&& newAdv.getWisdom() == null
+					&& newAdv.getCharisma() == null;
+		})
+		.verifyComplete();
+	}
 	
 	// create with name + traits
+	@Test
+	void testCreateWithNameTraits() {
+		adv2.setCharacterName("name");
+		adv2.setStrength(1);
+		adv2.setConstitution(1);
+		adv2.setIntelligence(1);
+		adv2.setWisdom(1);
+		adv2.setCharisma(1);
+		adv2.setDexterity(1);
+		
+		Adventurer createAdv = new Adventurer();
+		createAdv.setCharacterName("name");
+		createAdv.setStrength(1);
+		createAdv.setConstitution(1);
+		createAdv.setIntelligence(1);
+		createAdv.setWisdom(1);
+		createAdv.setCharisma(1);
+		createAdv.setDexterity(1);
+		
+		Mockito.when(advDao.save(createAdv)).thenReturn(Mono.just(createAdv));
+		
+		StepVerifier.create(service.createWithNameTraits(createAdv))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& newAdv.getArmorClass() == null
+					&& adv2.getStrength().equals(newAdv.getStrength())
+					&& adv2.getDexterity().equals(newAdv.getDexterity())
+					&& adv2.getConstitution().equals(newAdv.getConstitution())
+					&& adv2.getIntelligence().equals(newAdv.getIntelligence())
+					&& adv2.getWisdom().equals(newAdv.getWisdom())
+					&& adv2.getCharisma().equals(newAdv.getCharisma());
+		})
+		.verifyComplete();
+	}
 	
 	// create with name + armor class
+	@Test
+	void testCreateWithNameArmor() {
+		
+	}
 	
 	// create with name + traits + armor
+	@Test
+	void testCreateWithNameTraitsArmor() {
+		
+	}
 	
 	
 
