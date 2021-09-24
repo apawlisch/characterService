@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface AdventurerService {
 
-	Mono<Adventurer> getCharacter(String name);
+	Mono<Adventurer> getAdventurer(String name);
 
 	Mono<Adventurer> addHealth(String name, Integer value);
 
@@ -22,11 +22,13 @@ public interface AdventurerService {
 
 	Mono<Adventurer> setSpeed(String name, Integer value);
 
-	Mono<Adventurer> setSpeed(String name);
+	Mono<Adventurer> resetSpeed(String name);
 
 	Mono<Adventurer> setInitiative(String name, Integer value);
 
 	Mono<Adventurer> setArmorClass(String name, Integer value);
+	
+	Mono<Adventurer> routeCreate(Adventurer adv);
 
 	Mono<Adventurer> createWithName(Adventurer adv);
 
@@ -35,5 +37,7 @@ public interface AdventurerService {
 	Mono<Adventurer> createWithNameArmor(Adventurer adv);
 
 	Mono<Adventurer> createWithNameTraitsArmor(Adventurer adv);
+
+	
 
 }

@@ -28,7 +28,7 @@ public class AdventurerServiceTest {
 	private static Adventurer adv2;
 	
 	@BeforeAll
-	static void setup() {
+	static void setUp() {
 		adv = new Adventurer();
 		adv.setCharacterName("testAdv");
 		/*
@@ -37,6 +37,7 @@ public class AdventurerServiceTest {
 		adv.setIntelligence(1);
 		adv.setWisdom(1);
 		adv.setCharisma(1);
+		adv.setDexterity(1);
 		adv.setSpeed(1);
 		adv.setArmorClass(1);
 		adv.setInitiative(1);
@@ -50,6 +51,7 @@ public class AdventurerServiceTest {
 		adv2.setIntelligence(1);
 		adv2.setWisdom(1);
 		adv2.setCharisma(1);
+		adv.setDexterity(1);
 		adv2.setSpeed(1);
 		adv2.setArmorClass(1);
 		adv2.setInitiative(1);
@@ -67,41 +69,58 @@ public class AdventurerServiceTest {
 		
 	}
 	
+	
+	// get adventurer
+	@Test
+	void testGetAdventurer() {
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.getAdventurer("testAdv"))
+			.expectNext(adv)
+			.verifyComplete();
+		
+	}
+	
 	// add health
 	@Test
 	void testAddHealth() {
 		adv2.setCurrentHitPoints(32);
 		adv2.setCharacterName("testAdv");
-		adv2.setMaxHitPoints(40);
+		adv2.setMaxHitPoints(adv.getMaxHitPoints()); 
 		
 		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
 		
 		StepVerifier.create(service.addHealth("testAdv", 2))
-				.expectNext(adv2)
+				.expectNextMatches(newAdv -> {
+					return adv2.getCharacterName().equals(newAdv.getCharacterName())
+							&& adv2.getCurrentHitPoints().equals(newAdv.getCurrentHitPoints());
+				})
 				.verifyComplete();
-		
 		
 	}
 	
 	// subtract health
-	@Disabled
 	@Test
 	void testRemoveHealth() {
 		adv2.setCurrentHitPoints(28);
 		adv2.setCharacterName("testAdv");
-		adv2.setMaxHitPoints(40);
+		adv2.setMaxHitPoints(adv.getMaxHitPoints()); 
 		
 		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
 		
 		StepVerifier.create(service.removeHealth("testAdv", 2))
-				.expectNext(adv2)
+				.expectNextMatches(newAdv -> {
+					return adv2.getCharacterName().equals(newAdv.getCharacterName())
+							&& adv2.getCurrentHitPoints().equals(newAdv.getCurrentHitPoints());
+				})
 				.verifyComplete();
 		
 		
 	}
 	
 	// restore health to max
-	@Disabled
 	@Test
 	void testRestoreHealth() {
 		adv2.setCurrentHitPoints(40);
@@ -109,13 +128,115 @@ public class AdventurerServiceTest {
 		adv2.setCharacterName("testAdv");
 		
 		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
 		
 		StepVerifier.create(service.restoreHealth("testAdv"))
-				.expectNext(adv2)
+				.expectNextMatches(newAdv -> {
+					return adv2.getCharacterName().equals(newAdv.getCharacterName())
+							&& adv2.getCurrentHitPoints().equals(newAdv.getCurrentHitPoints());
+				})
 				.verifyComplete();
 	}
 	
 	
 	// set max health
+	@Test
+	void testSetMaxHealth() {
+		adv2.setMaxHitPoints(50);
+		adv2.setCharacterName("testAdv");
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.setMaxHealth("testAdv", 50))
+			.expectNextMatches(newAdv -> {
+				return adv2.getCharacterName().equals(newAdv.getCharacterName())
+						&& adv2.getMaxHitPoints().equals(newAdv.getMaxHitPoints());
+			})
+			.verifyComplete();
+	}
+	
+	// reset max health
+	@Test
+	void testResetMaxHealth() {
+		adv.setConstitution(5);
+		adv2.setCharacterName("testAdv");
+		adv2.setMaxHitPoints(10);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.resetMaxHealth("testAdv"))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getMaxHitPoints().equals(newAdv.getMaxHitPoints());
+		})
+		.verifyComplete();
+		
+	}
+	
+	// set traits
+	@Test
+	void testSetTraits() {
+		Adventurer setTraits = new Adventurer();
+		setTraits.setStrength(1);
+		setTraits.setConstitution(1);
+		setTraits.setIntelligence(1);
+		setTraits.setWisdom(1);
+		setTraits.setCharisma(1);
+		setTraits.setDexterity(1);
+		
+		adv2.setCharacterName("testAdv");
+		adv2.setStrength(1);
+		adv2.setConstitution(1);
+		adv2.setIntelligence(1);
+		adv2.setWisdom(1);
+		adv2.setCharisma(1);
+		adv2.setDexterity(1);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv));
+		Mockito.when(advDao.save(adv)).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.setTraits("testAdv", setTraits))
+		.expectNextMatches(newAdv -> {
+			return adv2.getCharacterName().equals(newAdv.getCharacterName())
+					&& adv2.getStrength().equals(newAdv.getStrength())
+					&& adv2.getConstitution().equals(newAdv.getConstitution())
+					&& adv2.getIntelligence().equals(newAdv.getIntelligence())
+					&& adv2.getWisdom().equals(newAdv.getWisdom())
+					&& adv2.getCharisma().equals(newAdv.getCharisma())
+					&& adv2.getDexterity().equals(newAdv.getDexterity());
+		})
+		.verifyComplete();
+		
+	}
+	
+	// set speed
+	@Test
+	void testSetSpeed() {
+		
+	}
+	
+	// reset speed
+	@Test
+	void testResetSpeed() {
+		
+	}
+	
+	// set initiative
+	
+	// set armor class
+	
+	// route create
+	
+	// create with name
+	
+	// create with name + traits
+	
+	// create with name + armor class
+	
+	// create with name + traits + armor
+	
+	
 
 }

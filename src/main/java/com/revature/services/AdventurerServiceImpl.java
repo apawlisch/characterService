@@ -22,7 +22,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 	// get character
 	// input: name
 	@Override
-	public Mono<Adventurer> getCharacter(String name) {
+	public Mono<Adventurer> getAdventurer(String name) {
 		return advDao.findByCharacterName(name);
 	}
 	
@@ -105,7 +105,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 	// reset speed
 	// input: name
 	@Override
-	public Mono<Adventurer> setSpeed(String name) {
+	public Mono<Adventurer> resetSpeed(String name) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
 			adv.setSpeed(adv.getDexterity() + 5);
 			return advDao.save(adv);
@@ -130,6 +130,58 @@ public class AdventurerServiceImpl implements AdventurerService {
 			adv.setArmorClass(value);
 			return advDao.save(adv);
 		});
+	}
+	
+	// route to correct "create character" choice
+	// input: adventurer object
+	@Override
+	public Mono<Adventurer> routeCreate(Adventurer adv) {
+		// if both armor class and traits are empty: createWithName
+		// if armor class full, traits empty: createWithNameArmor
+		// if armor class empty, traits full: creatWithNameTraits
+		// if armor class and traits are full: createWithNameTraitsArmor
+		
+		if(adv.getArmorClass() != null) {
+			// armor class is full
+			if(adv.getStrength() != null
+					&& adv.getConstitution() != null
+					&& adv.getIntelligence() != null
+					&& adv.getWisdom() != null
+					&& adv.getCharisma() != null
+					&& adv.getDexterity() != null) {
+				// traits are full
+				
+				// ac full, traits full
+				return createWithNameTraitsArmor(adv);
+			} else {
+				// traits are empty
+				
+				// ac full, traits empty
+				return createWithNameArmor(adv);
+			}
+			
+		} else {
+			// armor class is empty
+			if(adv.getStrength() != null
+					&& adv.getConstitution() != null
+					&& adv.getIntelligence() != null
+					&& adv.getWisdom() != null
+					&& adv.getCharisma() != null
+					&& adv.getDexterity() != null) {
+				// traits are full
+				
+				// traits full, ac empty
+				return createWithNameTraits(adv);
+				
+			} else {
+				// traits are empty
+				
+				// traits are empty, ac empty
+				return createWithName(adv);
+			}
+		}
+		
+		
 	}
 	
 	// create character*
