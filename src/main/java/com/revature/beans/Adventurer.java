@@ -2,7 +2,12 @@ package com.revature.beans;
 
 import java.io.Serializable;
 
-public class Character implements Serializable {
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+@Table("adventurer")
+public class Adventurer implements Serializable {
+	@PrimaryKey
 	private String characterName;
 	
 	private Integer strength;
@@ -18,11 +23,11 @@ public class Character implements Serializable {
 	private Integer currentHitPoints;
 	private Integer speed;
 	
-	public Character() {
+	public Adventurer() {
 		super();
 	}
 	
-	public Character(String characterName, Integer strength, Integer dexterity,
+	public Adventurer(String characterName, Integer strength, Integer dexterity,
 			Integer constitution, Integer intelligence, Integer wisdom, Integer charisma, Integer armorClass,
 			Integer initiative, Integer maxHitPoints, Integer currentHitPoints, Integer speed) {
 		this();
@@ -40,7 +45,7 @@ public class Character implements Serializable {
 		this.speed = speed;
 	}
 	
-	public Character(String characterName) {
+	public Adventurer(String characterName) {
 		this();
 		this.characterName = characterName;
 	}
@@ -168,7 +173,7 @@ public class Character implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Character other = (Character) obj;
+		Adventurer other = (Adventurer) obj;
 		if (armorClass == null) {
 			if (other.armorClass != null)
 				return false;
@@ -234,7 +239,7 @@ public class Character implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Character [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
+		return "Adventurer [characterName=" + characterName + ", strength=" + strength + ", dexterity=" + dexterity
 				+ ", constitution=" + constitution + ", intelligence=" + intelligence + ", wisdom=" + wisdom
 				+ ", charisma=" + charisma + ", armorClass=" + armorClass + ", initiative=" + initiative
 				+ ", maxHitPoints=" + maxHitPoints + ", currentHitPoints=" + currentHitPoints + ", speed=" + speed
