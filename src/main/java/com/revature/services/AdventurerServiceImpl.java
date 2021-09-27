@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Adventurer;
 import com.revature.data.AdventurerDao;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -32,7 +31,12 @@ public class AdventurerServiceImpl implements AdventurerService {
 	@Override
 	public Mono<Adventurer> addHealth(String name, Integer value) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
-			adv.setCurrentHitPoints( adv.getCurrentHitPoints() + value);
+			Integer amount = value + adv.getCurrentHitPoints();
+			if(amount > adv.getMaxHitPoints()) {
+				adv.setCurrentHitPoints(adv.getCurrentHitPoints());
+			} else {
+				adv.setCurrentHitPoints(amount);
+			}
 			return advDao.save(adv);
 		});
 	}
@@ -42,7 +46,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 	@Override
 	public Mono<Adventurer> removeHealth(String name, Integer value) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
-			adv.setCurrentHitPoints( adv.getCurrentHitPoints() - value);
+			adv.setCurrentHitPoints(adv.getCurrentHitPoints() - value);
 			return advDao.save(adv);
 		});
 	}
@@ -129,7 +133,6 @@ public class AdventurerServiceImpl implements AdventurerService {
 	public Mono<Adventurer> setArmorClass(String name, Integer value) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
 			adv.setArmorClass(value);
-			System.out.println(adv);
 			return advDao.save(adv);
 		});
 	}
