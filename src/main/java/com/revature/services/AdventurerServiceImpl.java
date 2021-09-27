@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Adventurer;
 import com.revature.data.AdventurerDao;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -128,6 +129,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 	public Mono<Adventurer> setArmorClass(String name, Integer value) {
 		return advDao.findByCharacterName(name).flatMap(adv -> {
 			adv.setArmorClass(value);
+			System.out.println(adv);
 			return advDao.save(adv);
 		});
 	}

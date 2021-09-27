@@ -30,19 +30,6 @@ public class AdventurerServiceTest {
 	@BeforeAll
 	static void setUp() {
 		adv = new Adventurer();
-		
-		/*
-		adv.setStrength(1);
-		adv.setConstitution(1);
-		adv.setIntelligence(1);
-		adv.setWisdom(1);
-		adv.setCharisma(1);
-		adv.setDexterity(1);
-		adv.setSpeed(1);
-		adv.setArmorClass(1);
-		adv.setInitiative(1);
-		*/
-		
 		adv2 = new Adventurer();
 		
 	}
