@@ -4,7 +4,6 @@ import org.springframework.data.cassandra.repository.ReactiveCassandraRepository
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Adventurer;
-import com.revature.dto.AdventurerDTO;
 
 import reactor.core.publisher.Mono;
 

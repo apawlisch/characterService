@@ -79,35 +79,35 @@ public class AdventurerController {
 	@PutMapping("{name}/traits")
 	public Mono<ResponseEntity<Adventurer>> setTraits(@PathVariable("name") String name, @RequestBody Adventurer traits) {
 		// get traits as adventurer object in request body
-		return advService.setTraits("name", traits).defaultIfEmpty(noAdventurer)
+		return advService.setTraits(name, traits).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set speed
 	@PutMapping("{name}/speed/{value}")
 	public Mono<ResponseEntity<Adventurer>> setSpeed(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setSpeed("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setSpeed(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// reset speed
 	@PutMapping("{name}/speed")
 	public Mono<ResponseEntity<Adventurer>> resetSpeed(@PathVariable("name") String name) {
-		return advService.resetSpeed("name").defaultIfEmpty(noAdventurer)
+		return advService.resetSpeed(name).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set initiative
 	@PutMapping("{name}/initiative/{value}")
 	public Mono<ResponseEntity<Adventurer>> setInitiative(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setInitiative("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setInitiative(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set armor class
 	@PutMapping("{name}/armorclass/{value}")
 	public Mono<ResponseEntity<Adventurer>> setArmorClass(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setArmorClass("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setArmorClass(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
