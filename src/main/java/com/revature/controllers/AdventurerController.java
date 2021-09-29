@@ -27,10 +27,10 @@ public class AdventurerController {
 	}
 	
 	// basic get response for the service
-	@GetMapping
-	public ResponseEntity<String> getBasic() {
-		return ResponseEntity.status(HttpStatus.OK).body("Hello");
-	}
+//	@GetMapping
+//	public ResponseEntity<String> getBasic() {
+//		return ResponseEntity.status(HttpStatus.OK).body("Hello");
+//	}
 	
 	// get adventurer
 	@GetMapping("{name}")
