@@ -37,6 +37,8 @@ public interface AdventurerService {
 	Mono<Adventurer> createWithNameArmor(Adventurer adv);
 
 	Mono<Adventurer> createWithNameTraitsArmor(Adventurer adv);
+	
+	Mono<Void> deleteAdventurer(String name);
 
 	
 

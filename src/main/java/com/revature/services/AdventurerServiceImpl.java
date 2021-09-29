@@ -292,5 +292,11 @@ public class AdventurerServiceImpl implements AdventurerService {
 		return advDao.save(advent);
 	}
 	
+	// delete character
+	@Override
+	public Mono<Void> deleteAdventurer(String name) {
+		return advDao.delete(new Adventurer(name));
+	}
+	
 
 }

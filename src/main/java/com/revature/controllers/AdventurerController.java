@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.revature.beans.Adventurer;
 import com.revature.services.AdventurerService;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -120,6 +120,12 @@ public class AdventurerController {
 		
 		return advService.routeCreate(newAdv).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.CREATED).body(adv));
+	}
+	
+	// delete adventurer
+	@DeleteMapping("{name}")
+	public Mono<ResponseEntity<Void>> deleteAdventurer(@PathVariable("name") String name){
+		return advService.deleteAdventurer(name).map(adv -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
 	}
 	
 

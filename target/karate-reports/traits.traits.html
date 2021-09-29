@@ -10,7 +10,7 @@
     <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src="res/bootstrap.min.js"></script>
     <script type="text/javascript" src="res/karate-report.js"></script>
-    <title>armorClass.armorClass</title>  
+    <title>traits.traits</title>  
   </head>
   <body>   
     <div id="root-container">
@@ -30,13 +30,13 @@
     <div>Scenarios</div>
   </div>         
   <div id="nav-date">
-    <div>2021-09-29 11:12:57 AM</div>
+    <div>2021-09-29 11:26:45 AM</div>
   </div>        
 </div>
 
         <div class="nav-container">
           <div class="nav-item failed">
-            <a href="#[1:2]"><span>[1:2]</span> <span>as a user, i can change the armorclass of a character</span></a>
+            <a href="#[1:2]"><span>[1:2]</span> <span>as a user, i can change the traits of a character</span></a>
           </div>
         </div>
       </div>
@@ -45,8 +45,8 @@
           <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
           <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
           <span class="feature-label">Feature:</span>
-          <span class="feature-path">armorClass/armorClass.feature</span><span class="feature-label">|</span>
-          <span class="feature-name">set the armorclass of a character</span>
+          <span class="feature-path">traits/traits.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">set the traits of a character</span>
           <span class="feature-description"></span>
         </div>
         <div class="scenario">
@@ -57,12 +57,12 @@
               </div>
               <div class="scenario-keyword">
                 Scenario: <span>[1:2]</span>
-                <span class="scenario-name">as a user, i can change the armorclass of a character</span>
+                <span class="scenario-name">as a user, i can change the traits of a character</span>
                 <span></span>
               </div>
             </div>
             <div class="scenario-time failed">
-              <span>ms:</span>&nbsp;<span>6290</span>
+              <span>ms:</span>&nbsp;<span>4738</span>
             </div>
           </div>
           
@@ -73,7 +73,7 @@
     <div class="step-container">
       <div class="step-ref passed"></div>
       
-      <div class="step-cell comment"># Give adventurer called Lifo an armorclass of 10</div>
+      <div class="step-cell comment"># Give adventurer called Armorman traits</div>
     </div>
     <div class="time-cell comment"></div>            
   </div>
@@ -83,10 +83,10 @@
       <div class="step-ref passed">5</div>
       
       <div class="step-cell passed">
-        <span>Given</span>&nbsp;<span>url &#39;http://localhost:8080/Lifo/armorclass/10&#39;</span>
+        <span>Given</span>&nbsp;<span>url &#39;http://localhost:8080/Armorman/traits&#39;</span>
       </div>
     </div>
-    <div class="time-cell passed">548</div>
+    <div class="time-cell passed">417</div>
   </div>
 
    
@@ -111,10 +111,10 @@
       <div class="step-ref passed">6</div>
       
       <div class="step-cell passed">
-        <span>When</span>&nbsp;<span>method put</span>
+        <span>And</span>&nbsp;<span>request {charisma : &#39;5&#39;, constitution : &#39;5&#39;, dexterity : &#39;5&#39;, intelligence : &#39;5&#39;, strength : &#39;5&#39;, wisdom : &#39;5&#39;}</span>
       </div>
     </div>
-    <div class="time-cell passed">5438</div>
+    <div class="time-cell passed">181</div>
   </div>
 
    
@@ -137,6 +137,34 @@
   <div class="step-row">
     <div class="step-container" id="0.7">
       <div class="step-ref passed">7</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">4020</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref passed">8</div>
       
       <div class="step-cell passed">
         <span>Then</span>&nbsp;<span>status 200</span>
@@ -163,14 +191,14 @@
   
 
   <div class="step-row">
-    <div class="step-container" id="0.8">
-      <div class="step-ref failed">8</div>
+    <div class="step-container" id="0.9">
+      <div class="step-ref failed">9</div>
       
       <div class="step-cell failed">
-        <span>And</span>&nbsp;<span>match response contains {characterName : &#39;Lifo&#39;, armorclass : 10}</span>
+        <span>And</span>&nbsp;<span>match response contains {characterName : &#39;Armorman&#39;, charisma : 5, constitution : 5, dexterity : 5, intelligence : 5, strength : 5, wisdom : 5}</span>
       </div>
     </div>
-    <div class="time-cell failed">303</div>
+    <div class="time-cell failed">120</div>
   </div>
 
    
@@ -179,18 +207,42 @@
 
   
 
-  <div class="preformatted" data-parent="0.8">11:12:57.310 classpath:armorClass/armorClass.feature:8
-And match response contains {characterName : &#39;Lifo&#39;, armorclass : 10}
+  <div class="preformatted" data-parent="0.9">11:26:45.216 classpath:traits/traits.feature:9
+And match response contains {characterName : &#39;Armorman&#39;, charisma : 5, constitution : 5, dexterity : 5, intelligence : 5, strength : 5, wisdom : 5}
 match failed: CONTAINS
-  $ | actual does not contain expected | actual does not contain key - &#39;armorclass&#39; (MAP:MAP)
+  $ | actual does not contain expected | all key-values did not match, expected has un-matched keys - [characterName, charisma, constitution, dexterity, intelligence, strength, wisdom] (MAP:MAP)
   {&quot;characterName&quot;:null,&quot;strength&quot;:null,&quot;dexterity&quot;:null,&quot;constitution&quot;:null,&quot;intelligence&quot;:null,&quot;wisdom&quot;:null,&quot;charisma&quot;:null,&quot;armorClass&quot;:null,&quot;initiative&quot;:null,&quot;maxHitPoints&quot;:null,&quot;currentHitPoints&quot;:null,&quot;speed&quot;:null}
-  {&quot;characterName&quot;:&quot;Lifo&quot;,&quot;armorclass&quot;:10}
+  {&quot;characterName&quot;:&quot;Armorman&quot;,&quot;strength&quot;:5,&quot;dexterity&quot;:5,&quot;constitution&quot;:5,&quot;intelligence&quot;:5,&quot;wisdom&quot;:5,&quot;charisma&quot;:5}
+
+    $.wisdom | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
+
+    $.strength | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
+
+    $.intelligence | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
+
+    $.dexterity | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
+
+    $.constitution | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
+
+    $.charisma | data types don&#39;t match (NULL:NUMBER)
+    null
+    5
 
     $.characterName | data types don&#39;t match (NULL:STRING)
     null
-    &#39;Lifo&#39;
+    &#39;Armorman&#39;
 
-classpath:armorClass/armorClass.feature:8
+classpath:traits/traits.feature:9
 </div>   
 
   
