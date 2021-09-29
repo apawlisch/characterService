@@ -22,20 +22,20 @@
       <img src="karate-logo.svg" alt="Karate"/>
     </a>
     <div class="nav-count">
-      <div id="nav-pass" class="bg-success">0</div>
-      <div id="nav-fail" class="bg-danger">1</div>
+      <div id="nav-pass" class="bg-success">1</div>
+      <div id="nav-fail" class="bg-danger">0</div>
     </div>
   </div>
   <div id="nav-type">
     <div>Scenarios</div>
   </div>         
   <div id="nav-date">
-    <div>2021-09-29 11:26:45 AM</div>
+    <div>2021-09-29 03:14:40 PM</div>
   </div>        
 </div>
 
         <div class="nav-container">
-          <div class="nav-item failed">
+          <div class="nav-item passed">
             <a href="#[1:2]"><span>[1:2]</span> <span>as a user, i can change the traits of a character</span></a>
           </div>
         </div>
@@ -61,8 +61,8 @@
                 <span></span>
               </div>
             </div>
-            <div class="scenario-time failed">
-              <span>ms:</span>&nbsp;<span>4738</span>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2588</span>
             </div>
           </div>
           
@@ -86,7 +86,7 @@
         <span>Given</span>&nbsp;<span>url &#39;http://localhost:8080/Armorman/traits&#39;</span>
       </div>
     </div>
-    <div class="time-cell passed">417</div>
+    <div class="time-cell passed">385</div>
   </div>
 
    
@@ -114,7 +114,7 @@
         <span>And</span>&nbsp;<span>request {charisma : &#39;5&#39;, constitution : &#39;5&#39;, dexterity : &#39;5&#39;, intelligence : &#39;5&#39;, strength : &#39;5&#39;, wisdom : &#39;5&#39;}</span>
       </div>
     </div>
-    <div class="time-cell passed">181</div>
+    <div class="time-cell passed">151</div>
   </div>
 
    
@@ -142,7 +142,7 @@
         <span>When</span>&nbsp;<span>method put</span>
       </div>
     </div>
-    <div class="time-cell passed">4020</div>
+    <div class="time-cell passed">1954</div>
   </div>
 
    
@@ -192,13 +192,13 @@
 
   <div class="step-row">
     <div class="step-container" id="0.9">
-      <div class="step-ref failed">9</div>
+      <div class="step-ref passed">9</div>
       
-      <div class="step-cell failed">
+      <div class="step-cell passed">
         <span>And</span>&nbsp;<span>match response contains {characterName : &#39;Armorman&#39;, charisma : 5, constitution : 5, dexterity : 5, intelligence : 5, strength : 5, wisdom : 5}</span>
       </div>
     </div>
-    <div class="time-cell failed">120</div>
+    <div class="time-cell passed">98</div>
   </div>
 
    
@@ -207,43 +207,7 @@
 
   
 
-  <div class="preformatted" data-parent="0.9">11:26:45.216 classpath:traits/traits.feature:9
-And match response contains {characterName : &#39;Armorman&#39;, charisma : 5, constitution : 5, dexterity : 5, intelligence : 5, strength : 5, wisdom : 5}
-match failed: CONTAINS
-  $ | actual does not contain expected | all key-values did not match, expected has un-matched keys - [characterName, charisma, constitution, dexterity, intelligence, strength, wisdom] (MAP:MAP)
-  {&quot;characterName&quot;:null,&quot;strength&quot;:null,&quot;dexterity&quot;:null,&quot;constitution&quot;:null,&quot;intelligence&quot;:null,&quot;wisdom&quot;:null,&quot;charisma&quot;:null,&quot;armorClass&quot;:null,&quot;initiative&quot;:null,&quot;maxHitPoints&quot;:null,&quot;currentHitPoints&quot;:null,&quot;speed&quot;:null}
-  {&quot;characterName&quot;:&quot;Armorman&quot;,&quot;strength&quot;:5,&quot;dexterity&quot;:5,&quot;constitution&quot;:5,&quot;intelligence&quot;:5,&quot;wisdom&quot;:5,&quot;charisma&quot;:5}
-
-    $.wisdom | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.strength | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.intelligence | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.dexterity | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.constitution | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.charisma | data types don&#39;t match (NULL:NUMBER)
-    null
-    5
-
-    $.characterName | data types don&#39;t match (NULL:STRING)
-    null
-    &#39;Armorman&#39;
-
-classpath:traits/traits.feature:9
-</div>   
+     
 
   
 
