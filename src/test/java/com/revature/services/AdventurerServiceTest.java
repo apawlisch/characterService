@@ -2,7 +2,6 @@ package com.revature.services;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -77,9 +76,9 @@ public class AdventurerServiceTest {
 		
 	}
 	
-	// add health
+	// add health and it doesn't go over maxHP
 	@Test
-	void testAddHealth() {
+	void testAddHealthBelowMax() {
 		adv2.setCurrentHitPoints(32);
 		adv2.setCharacterName("testAdv");
 		adv2.setMaxHitPoints(adv.getMaxHitPoints()); 
@@ -91,6 +90,27 @@ public class AdventurerServiceTest {
 				.expectNextMatches(newAdv -> {
 					return adv2.getCharacterName().equals(newAdv.getCharacterName())
 							&& adv2.getCurrentHitPoints().equals(newAdv.getCurrentHitPoints());
+				})
+				.verifyComplete();
+		
+	}
+	
+	// add health but the total does go over maxHP
+	@Test
+	void testAddHealthHitsMax() {
+		adv.setCurrentHitPoints(40);
+		adv.setMaxHitPoints(40);
+		
+		adv2.setCurrentHitPoints(39);
+		adv2.setMaxHitPoints(40);
+		
+		Mockito.when(advDao.findByCharacterName("testAdv")).thenReturn(Mono.just(adv2));
+		Mockito.when(advDao.save(Mockito.any())).thenReturn(Mono.just(adv));
+		
+		StepVerifier.create(service.addHealth("testAdv", 2))
+				.expectNextMatches(newAdv -> {
+					return adv.getCharacterName().equals(newAdv.getCharacterName())
+							&& adv.getCurrentHitPoints().equals(newAdv.getCurrentHitPoints());
 				})
 				.verifyComplete();
 		

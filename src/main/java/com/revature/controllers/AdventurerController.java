@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.revature.beans.Adventurer;
 import com.revature.services.AdventurerService;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -79,35 +79,35 @@ public class AdventurerController {
 	@PutMapping("{name}/traits")
 	public Mono<ResponseEntity<Adventurer>> setTraits(@PathVariable("name") String name, @RequestBody Adventurer traits) {
 		// get traits as adventurer object in request body
-		return advService.setTraits("name", traits).defaultIfEmpty(noAdventurer)
+		return advService.setTraits(name, traits).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set speed
 	@PutMapping("{name}/speed/{value}")
 	public Mono<ResponseEntity<Adventurer>> setSpeed(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setSpeed("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setSpeed(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// reset speed
 	@PutMapping("{name}/speed")
 	public Mono<ResponseEntity<Adventurer>> resetSpeed(@PathVariable("name") String name) {
-		return advService.resetSpeed("name").defaultIfEmpty(noAdventurer)
+		return advService.resetSpeed(name).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set initiative
 	@PutMapping("{name}/initiative/{value}")
 	public Mono<ResponseEntity<Adventurer>> setInitiative(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setInitiative("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setInitiative(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
 	// set armor class
 	@PutMapping("{name}/armorclass/{value}")
 	public Mono<ResponseEntity<Adventurer>> setArmorClass(@PathVariable("name") String name, @PathVariable("value") Integer value) {
-		return advService.setArmorClass("name", value).defaultIfEmpty(noAdventurer)
+		return advService.setArmorClass(name, value).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.OK).body(adv));
 	}
 	
@@ -120,6 +120,12 @@ public class AdventurerController {
 		
 		return advService.routeCreate(newAdv).defaultIfEmpty(noAdventurer)
 				.map(adv -> ResponseEntity.status(HttpStatus.CREATED).body(adv));
+	}
+	
+	// delete adventurer
+	@DeleteMapping("{name}")
+	public Mono<ResponseEntity<Void>> deleteAdventurer(@PathVariable("name") String name){
+		return advService.deleteAdventurer(name).map(adv -> ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
 	}
 	
 

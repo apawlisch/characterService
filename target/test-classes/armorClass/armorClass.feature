@@ -5,4 +5,4 @@ Scenario: as a user, i can change the armorclass of a character
 Given url 'http://localhost:8080/Lifo/armorclass/10'
 When method put
 Then status 200
-And match response contains {characterName : 'Lifo', armorclass : '10'}
+And match response contains {characterName : 'Lifo', armorclass : 10}

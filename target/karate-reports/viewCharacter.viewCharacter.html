@@ -10,7 +10,7 @@
     <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
     <script type="text/javascript" src="res/bootstrap.min.js"></script>
     <script type="text/javascript" src="res/karate-report.js"></script>
-    <title>armorClass.armorClass</title>  
+    <title>viewCharacter.viewCharacter</title>  
   </head>
   <body>   
     <div id="root-container">
@@ -22,21 +22,21 @@
       <img src="karate-logo.svg" alt="Karate"/>
     </a>
     <div class="nav-count">
-      <div id="nav-pass" class="bg-success">0</div>
-      <div id="nav-fail" class="bg-danger">1</div>
+      <div id="nav-pass" class="bg-success">1</div>
+      <div id="nav-fail" class="bg-danger">0</div>
     </div>
   </div>
   <div id="nav-type">
     <div>Scenarios</div>
   </div>         
   <div id="nav-date">
-    <div>2021-09-29 11:12:57 AM</div>
+    <div>2021-09-29 11:16:32 AM</div>
   </div>        
 </div>
 
         <div class="nav-container">
-          <div class="nav-item failed">
-            <a href="#[1:2]"><span>[1:2]</span> <span>as a user, i can change the armorclass of a character</span></a>
+          <div class="nav-item passed">
+            <a href="#[1:2]"><span>[1:2]</span> <span>as a user, i can get a character by name</span></a>
           </div>
         </div>
       </div>
@@ -45,8 +45,8 @@
           <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
           <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
           <span class="feature-label">Feature:</span>
-          <span class="feature-path">armorClass/armorClass.feature</span><span class="feature-label">|</span>
-          <span class="feature-name">set the armorclass of a character</span>
+          <span class="feature-path">viewCharacter/viewCharacter.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">view a character</span>
           <span class="feature-description"></span>
         </div>
         <div class="scenario">
@@ -57,12 +57,12 @@
               </div>
               <div class="scenario-keyword">
                 Scenario: <span>[1:2]</span>
-                <span class="scenario-name">as a user, i can change the armorclass of a character</span>
+                <span class="scenario-name">as a user, i can get a character by name</span>
                 <span></span>
               </div>
             </div>
-            <div class="scenario-time failed">
-              <span>ms:</span>&nbsp;<span>6290</span>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2251</span>
             </div>
           </div>
           
@@ -73,7 +73,7 @@
     <div class="step-container">
       <div class="step-ref passed"></div>
       
-      <div class="step-cell comment"># Give adventurer called Lifo an armorclass of 10</div>
+      <div class="step-cell comment"># Get an adventurer called Lifo</div>
     </div>
     <div class="time-cell comment"></div>            
   </div>
@@ -83,10 +83,10 @@
       <div class="step-ref passed">5</div>
       
       <div class="step-cell passed">
-        <span>Given</span>&nbsp;<span>url &#39;http://localhost:8080/Lifo/armorclass/10&#39;</span>
+        <span>Given</span>&nbsp;<span>url &#39;http://localhost:8080/Lifo&#39;</span>
       </div>
     </div>
-    <div class="time-cell passed">548</div>
+    <div class="time-cell passed">249</div>
   </div>
 
    
@@ -111,10 +111,10 @@
       <div class="step-ref passed">6</div>
       
       <div class="step-cell passed">
-        <span>When</span>&nbsp;<span>method put</span>
+        <span>When</span>&nbsp;<span>method get</span>
       </div>
     </div>
-    <div class="time-cell passed">5438</div>
+    <div class="time-cell passed">1829</div>
   </div>
 
    
@@ -164,13 +164,13 @@
 
   <div class="step-row">
     <div class="step-container" id="0.8">
-      <div class="step-ref failed">8</div>
+      <div class="step-ref passed">8</div>
       
-      <div class="step-cell failed">
-        <span>And</span>&nbsp;<span>match response contains {characterName : &#39;Lifo&#39;, armorclass : 10}</span>
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains {characterName : &#39;Lifo&#39;}</span>
       </div>
     </div>
-    <div class="time-cell failed">303</div>
+    <div class="time-cell passed">173</div>
   </div>
 
    
@@ -179,19 +179,7 @@
 
   
 
-  <div class="preformatted" data-parent="0.8">11:12:57.310 classpath:armorClass/armorClass.feature:8
-And match response contains {characterName : &#39;Lifo&#39;, armorclass : 10}
-match failed: CONTAINS
-  $ | actual does not contain expected | actual does not contain key - &#39;armorclass&#39; (MAP:MAP)
-  {&quot;characterName&quot;:null,&quot;strength&quot;:null,&quot;dexterity&quot;:null,&quot;constitution&quot;:null,&quot;intelligence&quot;:null,&quot;wisdom&quot;:null,&quot;charisma&quot;:null,&quot;armorClass&quot;:null,&quot;initiative&quot;:null,&quot;maxHitPoints&quot;:null,&quot;currentHitPoints&quot;:null,&quot;speed&quot;:null}
-  {&quot;characterName&quot;:&quot;Lifo&quot;,&quot;armorclass&quot;:10}
-
-    $.characterName | data types don&#39;t match (NULL:STRING)
-    null
-    &#39;Lifo&#39;
-
-classpath:armorClass/armorClass.feature:8
-</div>   
+     
 
   
 
